@@ -23,7 +23,7 @@ public class PersonaController {
         return personaRepository
                 .findAll()
                 .stream()
-                .map(personaEntity -> personaMapper.personaDtoToPersonaEntity(personaEntity))
+                .map(personaEntity -> personaMapper.personaEntityToPersonaDto(personaEntity))
                 .collect(Collectors.toList());
     }
 
@@ -31,9 +31,9 @@ public class PersonaController {
     @PostMapping
     private PersonaDto crearPersona(@RequestBody PersonaDto persona) {
         PersonaEntity personaEntity = this.personaRepository.save(
-                personaMapper.personaEntityToPersonaDto(persona)
+                personaMapper.personaDtoToPersonaEntity(persona)
         );
-        return personaMapper.personaDtoToPersonaEntity(personaEntity);
+        return personaMapper.personaEntityToPersonaDto(personaEntity);
     }
 
 }
